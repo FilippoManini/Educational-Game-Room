@@ -1,6 +1,7 @@
 # Educational-Game-Room
 
 Progetto di tirocinio per il corso di Informatica.
+- [Demo](https://youtu.be/GfSkMBqEvTE)
 
 ## Obiettivo
 
