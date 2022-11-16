@@ -1,33 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockEndIf : MonoBehaviour, IBlock , IEndStatement
+namespace UEBlockly
 {
-    public bool isDragged { get; set; }
-    public bool isInMain { get; set; }
-    public void Execute()
+    public class BlockEndIf : MonoBehaviour, IEndStatement
     {
-        Debug.Log("if ended");
-        transform.parent.parent.GetComponent<BlockIf>().EndIf();
+        public void Execute()
+        {
+            Debug.Log("Block " + this.name + "if ended");
+            transform.parent.parent.GetComponent<BlockIf>().EndIf();
+        }
+
     }
-
-    public void ErrorMessage(ErrorCode errorCode)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public float RecoursiveGetSize(GameObject toResizeBlock, GameObject endStatement)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    
-
-    public float RecoursiveGetSize(GameObject toResizeBlock)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    
 }
+
+

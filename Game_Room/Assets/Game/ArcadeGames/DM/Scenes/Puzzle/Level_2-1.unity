@@ -35382,18 +35382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4be9198725e7bfe4c92f5c25a4e59b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterDb: {fileID: 0}
-  artworkSprite: {fileID: 0}
-  playerPrefabs:
-  - {fileID: 5376799867332711360, guid: 18e4594616664394da463064d3e5c811, type: 3}
-  - {fileID: 4597841760801782416, guid: 61c11a74dc4edd24aa3d7730a1190603, type: 3}
-  - {fileID: 868035846173665808, guid: 6e830a8f1bb3a2f43be256805d6da0d2, type: 3}
-  - {fileID: 3127507828357213617, guid: 9af2e1917f6f84248a033530fd2fb339, type: 3}
-  - {fileID: 1312695521731392024, guid: 3323e30be79f28f49a5a775bb87620e5, type: 3}
-  - {fileID: 4148475923123700137, guid: f88c3bf7115b838429c7ed0da16453b5, type: 3}
-  - {fileID: 4960585109387718232, guid: a5e7c9ea04f5fb245ac8fb7930cc9ddf, type: 3}
-  - {fileID: 6333663765662472754, guid: f061711a42461054cb04aabcb2ae5d93, type: 3}
-  - {fileID: 3279553184281141335, guid: 2329b9260fdd6f64fad0dbc2240b42c4, type: 3}
+  characterDb: {fileID: 11400000, guid: d3c42eb100d7bd14e944faa677e8669b, type: 2}
   virtualCamera: {fileID: 1260661105}
 --- !u!4 &754455025
 Transform:
@@ -35531,7 +35520,7 @@ PrefabInstance:
       objectReference: {fileID: 516143495}
     - target: {fileID: 8908011996624677318, guid: c41308f2ece69aa40920d7a213851ece, type: 3}
       propertyPath: dialogue.Array.size
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8908011996624677318, guid: c41308f2ece69aa40920d7a213851ece, type: 3}
       propertyPath: dialogue.Array.data[0]
@@ -35539,29 +35528,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8908011996624677318, guid: c41308f2ece69aa40920d7a213851ece, type: 3}
       propertyPath: dialogue.Array.data[1]
-      value: There will be a quiz !!!
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8908011996624677318, guid: c41308f2ece69aa40920d7a213851ece, type: 3}
       propertyPath: dialogue.Array.data[2]
+      value: There will be a quiz !!!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908011996624677318, guid: c41308f2ece69aa40920d7a213851ece, type: 3}
+      propertyPath: dialogue.Array.data[3]
       value: A hero is on his way to the castle to complete his mission. However,
         he's been told that the castle is surrounded with a couple of powerful dragons!
       objectReference: {fileID: 0}
     - target: {fileID: 8908011996624677318, guid: c41308f2ece69aa40920d7a213851ece, type: 3}
-      propertyPath: dialogue.Array.data[3]
+      propertyPath: dialogue.Array.data[4]
       value: 'each dragon takes 2 bullets to be defeated, our hero has no idea how
         many bullets he should carry.. '
       objectReference: {fileID: 0}
     - target: {fileID: 8908011996624677318, guid: c41308f2ece69aa40920d7a213851ece, type: 3}
-      propertyPath: dialogue.Array.data[4]
+      propertyPath: dialogue.Array.data[5]
       value: Assuming he's gonna grab a specific given number of bullets and move
         forward to fight another specific given number of dragons, will he survive?
       objectReference: {fileID: 0}
     - target: {fileID: 8908011996624677318, guid: c41308f2ece69aa40920d7a213851ece, type: 3}
-      propertyPath: dialogue.Array.data[5]
+      propertyPath: dialogue.Array.data[6]
       value: Return True if yes, False otherwise
       objectReference: {fileID: 0}
     - target: {fileID: 8908011996624677318, guid: c41308f2ece69aa40920d7a213851ece, type: 3}
-      propertyPath: dialogue.Array.data[6]
+      propertyPath: dialogue.Array.data[7]
       value: Press F1 to open the Block UI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -44122,7 +44115,7 @@ PrefabInstance:
       objectReference: {fileID: 516143495}
     - target: {fileID: 8908011996624677318, guid: c41308f2ece69aa40920d7a213851ece, type: 3}
       propertyPath: dialogue.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8908011996624677318, guid: c41308f2ece69aa40920d7a213851ece, type: 3}
       propertyPath: dialogue.Array.data[0]
@@ -44130,24 +44123,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8908011996624677318, guid: c41308f2ece69aa40920d7a213851ece, type: 3}
       propertyPath: dialogue.Array.data[1]
-      value: There will be a quiz !!!
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8908011996624677318, guid: c41308f2ece69aa40920d7a213851ece, type: 3}
       propertyPath: dialogue.Array.data[2]
+      value: There will be a quiz !!!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908011996624677318, guid: c41308f2ece69aa40920d7a213851ece, type: 3}
+      propertyPath: dialogue.Array.data[3]
       value: 'Given the following variables: "word" = "sheep", "space" = " " , "result"
         = "";'
       objectReference: {fileID: 0}
     - target: {fileID: 8908011996624677318, guid: c41308f2ece69aa40920d7a213851ece, type: 3}
-      propertyPath: dialogue.Array.data[3]
+      propertyPath: dialogue.Array.data[4]
       value: 'return a string with a murmur: "1 sheep...2 sheep...3 sheep...".'
       objectReference: {fileID: 0}
     - target: {fileID: 8908011996624677318, guid: c41308f2ece69aa40920d7a213851ece, type: 3}
-      propertyPath: dialogue.Array.data[4]
-      value: Press F1 to open the Block UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 8908011996624677318, guid: c41308f2ece69aa40920d7a213851ece, type: 3}
       propertyPath: dialogue.Array.data[5]
-      value: '"word" = "sheep"\n, "space" = " "\n , "result" = "";'
+      value: Press F1 to open the Block UI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c41308f2ece69aa40920d7a213851ece, type: 3}

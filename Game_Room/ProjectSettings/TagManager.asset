@@ -4,7 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - DoorButton
   - Ground
   - Enemy
   - Arcade
@@ -18,6 +17,10 @@ TagManager:
   - SideBar
   - Main
   - Restart
+  - projectile
+  - FxTemporaire
+  - Hand
+  - LaserPointer
   layers:
   - Default
   - TransparentFX
@@ -26,7 +29,7 @@ TagManager:
   - Water
   - UI
   - Ground
-  - PostProcessing
+  - 
   - 
   - 
   - 

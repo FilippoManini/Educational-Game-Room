@@ -1,20 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class StartBlock : MonoBehaviour
+namespace UEBlockly
 {
-    private void Start()
+    public class StartBlock : MonoBehaviour
     {
-        GetComponentInChildren<DropPosition>().SetActive();
-    }
-    public void Execute()
-    {
-        var next = GetComponentInChildren<DropPosition>().droppedGameObject;
-        if (next != null)
+        private void Start()
         {
-            next.GetComponent<IBlock>().Execute();
+            GetComponentInChildren<DropPositionVR>().SetActive(true);
+            LaunchBlocks.firstLaunch = false;
+        }
+        public void Execute()
+        {
+            print("start");
+            LaunchBlocks.firstLaunch = true;
+            var next = GetComponentInChildren<DropPositionVR>().droppedGameObject;
+            if (next != null)
+            {
+                next.GetComponent<IBlock>().Execute();
+
+            }
         }
     }
 }

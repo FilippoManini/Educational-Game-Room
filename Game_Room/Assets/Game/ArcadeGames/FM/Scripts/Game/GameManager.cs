@@ -7,6 +7,8 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using System;
+using Valve.VR;
+using Valve.VR.Extras;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,12 +28,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float wordSpeed; //0.06
     [SerializeField] private AudioSource audioSource;
 
+    private bool ifjustpressed = false;
+
     private void Start()
     {
         //inizializzo le varie parti del testo
         textOnScreen = new List<string>
         {
             TextOnScreen.p1,
+            "C",
             TextOnScreen.p2,
             TextOnScreen.q1,
             TextOnScreen.q2,
@@ -50,13 +55,21 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Blockly") && !isGuiOpen)
+        //attivazione laser
+        if (SteamVR_Input.GetStateDown("default", "triggerLaser", SteamVR_Input_Sources.Any) && isGuiOpen)
+            SteamVR_LaserPointer.isActive = !SteamVR_LaserPointer.isActive;
+
+        if (!isGuiOpen)
+            SteamVR_LaserPointer.isActive = false;
+
+        if (SteamVR_Input.GetStateDown("default", "BlocklyOpen", SteamVR_Input_Sources.LeftHand) && !isGuiOpen)
         {
             isGuiOpen = true;
 
             eventSystem.enabled = false;
 
             SetScene();
+
             if (nameScene != String.Empty) { 
                 SceneManager.LoadScene(nameScene, LoadSceneMode.Additive); 
             }
@@ -82,7 +95,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        else if (Input.GetButtonDown("Blockly") && isGuiOpen)
+        else if (SteamVR_Input.GetStateDown("default", "BlocklyOpen", SteamVR_Input_Sources.LeftHand) && isGuiOpen)
         {
             isGuiOpen = false;
             
@@ -122,17 +135,17 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            if (nextButton.activeSelf) 
+
+
+        //if (Input.GetKeyDown(KeyCode.Return))
+        if (!ifjustpressed){
+            if (ButtonVR.button2 || ButtonVR.button1)
             {
-                NextQuestion();
-                //if (player.AnswerCheat) SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                /*var changeLevel = gameObject.GetComponent<ChangeLevel>();
-                //changeLevel.gameName = "Game";
-                changeLevel.CompareTag("Restart");
-                var collider = transform.GetComponent<Collider2D>();
-                changeLevel.OnTriggerEnter2D(collider);*/
+                if (nextButton.activeSelf)
+                {
+                    NextQuestion();
+                    StartCoroutine(ifjustpressedTime());
+                }
             }
         }
 
@@ -235,5 +248,12 @@ public class GameManager : MonoBehaviour
         //utilizzo WaitForSeconds per evitare che contemporaneamente nelle scene ci sia attivo eventSystem
         yield return new WaitForSeconds(0.5f);
         eventSystem.enabled = true;
+    }
+
+    private IEnumerator ifjustpressedTime() 
+    {
+        ifjustpressed = true;
+        yield return new WaitForSeconds(3f);
+        ifjustpressed = false;
     }
 }

@@ -1,75 +1,73 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BlockUpdateByBlock : MonoBehaviour , IBlock
+namespace UEBlockly
 {
-
-    private string variableName;
-    private DropPosition next, value;
-    public bool isDragged { get; set; }
-    public bool isInMain { get; set; }
-
-    private void Start()
-    {
-        isDragged = false;
-        next = transform.Find("DropNextBlock").GetComponent<DropPosition>();
-        value = transform.Find("DropValueBlock").GetComponent<DropPosition>();
-    }
-
-    public void Execute()
-    {
-        variableName = transform.Find("InputField").Find("Text").GetComponent<Text>().text;
-
-        ErrorCode err = IBlock.IsValidName(variableName);
-        if (err != ErrorCode.NoError)
-        {
-            ErrorMessage(err);
-            return;
-        }
-
-        if (value.droppedGameObject == null)
-        {
-            ErrorMessage(ErrorCode.NotDroppedValue);
-            return;
-        }
-        var MessageInfo = (variableName, value.droppedGameObject.tag, value.droppedGameObject);
-        SendMessageUpwards("UpdateVariableByBlock",MessageInfo);
-        
-        var nextBlock = next.droppedGameObject;
-        if (nextBlock != null)
-        {
-            nextBlock.GetComponent<IBlock>().Execute();
-        }
-        else
-        {
-            SendMessageUpwards("IsFinish", gameObject.name);
-        }
-    }
-
-    public void ErrorMessage(ErrorCode errorCode)
-    {
-        SendMessageUpwards("CatchError", errorCode);
-    }
-
-    public float RecoursiveGetSize(GameObject toResizeBlock, GameObject endStatement)
+    public class BlockUpdateByBlock : MonoBehaviour, IBlock
     {
 
-        var sizeY = gameObject.GetComponent<RectTransform>().sizeDelta.y;
+        private string variableName;
+        private DropPositionVR next, value;
+        public bool isDragged { get; set; }
 
-        // If there are not other objects after this one
-        if (next.droppedGameObject == null || next.droppedGameObject.GetComponent<IEndStatement>() != null)
+        private void Start()
         {
-            next.droppedGameObject = endStatement;
-            return sizeY;
+            isDragged = false;
+            next = transform.Find("DropNextBlock").GetComponent<DropPositionVR>();
+            value = transform.Find("DropValueBlock").GetComponent<DropPositionVR>();
         }
 
-        return sizeY + next.droppedGameObject.GetComponent<IBlock>().RecoursiveGetSize(toResizeBlock, endStatement);
-    }
+        public void Execute()
+        {
+            variableName = transform.Find("InputField").Find("Text").GetComponent<Text>().text;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.isTrigger)
-            isInMain = collision.CompareTag("Main");
-    }
+            ErrorCode err = IBlock.IsValidName(variableName);
+            if (err != ErrorCode.NoError)
+            {
+                ErrorMessage(err);
+                return;
+            }
 
+            if (value.droppedGameObject == null)
+            {
+                ErrorMessage(ErrorCode.NotDroppedValue);
+                return;
+            }
+            var MessageInfo = (variableName, value.droppedGameObject.tag, value.droppedGameObject);
+            SendMessageUpwards("UpdateVariableByBlock", MessageInfo);
+
+            var nextBlock = next.droppedGameObject;
+            if (nextBlock != null)
+            {
+                if (nextBlock.GetComponent<IBlock>() != null)
+                    nextBlock.GetComponent<IBlock>().Execute();
+                else
+                    nextBlock.GetComponent<IEndStatement>().Execute();
+            }
+            else
+            {
+                SendMessageUpwards("IsFinish", gameObject.name);
+            }
+        }
+
+        public void ErrorMessage(ErrorCode errorCode)
+        {
+            SendMessageUpwards("CatchError", errorCode);
+        }
+
+        public float RecoursiveGetSize(GameObject toResizeBlock, GameObject endStatement)
+        {
+
+            var sizeY = gameObject.GetComponent<RectTransform>().sizeDelta.y;
+
+            // If there are not other objects after this one
+            if (next.droppedGameObject == null || next.droppedGameObject.GetComponent<IEndStatement>() != null)
+            {
+                next.droppedGameObject = endStatement;
+                return sizeY;
+            }
+
+            return sizeY + next.droppedGameObject.GetComponent<IBlock>().RecoursiveGetSize(toResizeBlock, endStatement);
+        }
+    }
 }

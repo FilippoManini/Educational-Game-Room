@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Assets.Scripts;
+using UEBlockly;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,14 +11,13 @@ public class StartBossFight : MonoBehaviour
     [SerializeField] private OpenBlockly blockly;
     [SerializeField] private OpenWorldPlayerController player;
 
-    private bool esciLastValue = false, stopExecuteBlocks = false;
+    private bool stopExecuteBlocks = false;
 
     //quando il giocatore si avvicina all'uscita
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.tag != "Player") return;
         Executor.variabili["sullUscita"] = "true";
-        esciLastValue = true;
         if(!bool.Parse(Executor.variabili["esci"]))return;
         other.GetComponent<OpenWorldPlayerController>().LockMovement();
         HUD.SetActive(true);
@@ -33,7 +30,6 @@ public class StartBossFight : MonoBehaviour
     {
         if (other.tag != "Player") return;
         Executor.variabili["sullUscita"] = "false";
-        esciLastValue = false;
     }
 
     void Update()
@@ -43,12 +39,12 @@ public class StartBossFight : MonoBehaviour
         LaunchBlocks.launch = true;
         //aspetto la fine dell'esecuzione per leggere
         bool sullUscita = bool.Parse(Executor.variabili["sullUscita"]);
-        bool esci = bool.Parse(Executor.variabili["esci"]);
+        bool uscita = bool.Parse(Executor.variabili["esci"]);
         bool collisioni = bool.Parse(Executor.variabili["collisioni"]);
-        if (!sullUscita && esci)
+        if (!sullUscita && uscita)
         {
             
-            Debug.Log("ha modificato esci");
+            Debug.Log("ha modificato uscita");
             ShowDebugMessage("hai provato a saltare il livello? non è una cosa bella sai?");
             stopExecuteBlocks = true;
         }

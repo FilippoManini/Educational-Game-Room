@@ -26,8 +26,11 @@ namespace Assets.DM.Script.Puzzle
         }
 
         private void FixedUpdate() {
+
+            movementInput = JoystickController.leverVector;
+
             //if movement input is not 0, try to move
-            if(movementInput != Vector2.zero)
+            if (movementInput != Vector2.zero)
             {
                 bool success = TryMove(movementInput);
 
@@ -82,11 +85,6 @@ namespace Assets.DM.Script.Puzzle
                 // Cannot move if there's no direction to move in
                 return false;
             }        
-        }
-
-        void OnMove(InputValue movementvalue)
-        {
-            movementInput = movementvalue.Get<Vector2>();
         }
     }
 }
